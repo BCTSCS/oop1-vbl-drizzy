@@ -1,0 +1,19 @@
+# Compiled class files
+*.class
+
+# Gradle build folders
+/build/
+/out/
+
+# Gradle wrapper files
+.gradle/
+/gradle/
+
+# IDE files
+*.iml
+.idea/
+*.ipr
+*.iws
+
+# Logs and temporary files
+*.log
