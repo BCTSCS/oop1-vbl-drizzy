@@ -1,11 +1,13 @@
 name: Autograding Tests
-'on':
-- push
-- repository_dispatch
+on:
+  - workflow_dispatch
+  - repository_dispatch
+
 permissions:
   checks: write
   actions: read
   contents: read
+
 jobs:
   run-autograding-tests:
     runs-on: ubuntu-latest
@@ -13,18 +15,61 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-    - name: Classes Test
-      id: classes-test
+
+    - name: Set up JDK
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '21'
+
+    # ----------------------------
+    # Player Test
+    - name: Player Test
+      id: player
       uses: classroom-resources/autograding-command-grader@v1
       with:
-        test-name: Classes Test
-        setup-command: gradle build
-        command: gradle test
-        timeout: 10
-        max-score: 5
+        test-name: Player Test
+        command: ./gradlew test --tests PlayerTest
+        max-score: 1
+
+    # ----------------------------
+    # Vlogger Test
+    - name: Vlogger Test
+      id: vlogger
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Vlogger Test
+        command: ./gradlew test --tests VloggerTest
+        max-score: 1
+
+    # ----------------------------
+    # Painting Test
+    - name: Painting Test
+      id: painting
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Painting Test
+        command: ./gradlew test --tests PaintingTest
+        max-score: 1
+
+    # ----------------------------
+    # UserApp Test
+    - name: UserApp Test
+      id: userapp
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: UserApp Test
+        command: ./gradlew test --tests UserAppTest
+        max-score: 1
+
+    # ----------------------------
+    # Autograding Reporter
     - name: Autograding Reporter
       uses: classroom-resources/autograding-grading-reporter@v1
       env:
-        CLASSES-TEST_RESULTS: "${{steps.classes-test.outputs.result}}"
+        PLAYER_RESULTS: "${{steps.player.outputs.result}}"
+        VLOGGER_RESULTS: "${{steps.vlogger.outputs.result}}"
+        PAINTING_RESULTS: "${{steps.painting.outputs.result}}"
+        USERAPP_RESULTS: "${{steps.userapp.outputs.result}}"
       with:
-        runners: classes-test
+        runners: player,vlogger,painting,userapp
