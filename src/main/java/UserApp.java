@@ -8,7 +8,7 @@ public class UserApp extends JFrame{
 
     public UserApp(){
         panel = new JPanel();
-        painting = new Painting("Davinci", 1976);
+        painting = new Painting();
         vlogger = new Vlogger();
         user = new Player();
 
@@ -25,6 +25,7 @@ public class UserApp extends JFrame{
         panel.add(new JLabel("Level: "+user.getLevel()));
 
         add(panel);
+        setVisible(true);
     }
 
     public static void main(String[] args){

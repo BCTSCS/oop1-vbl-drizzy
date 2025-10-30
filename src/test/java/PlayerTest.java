@@ -6,6 +6,6 @@ public class PlayerTest {
     @Test
     public void testGetName() {
         Player p = new Player();
-        assertEquals("Default Name", p.getName());
+        assertEquals("Jared", p.getName());
     }
 }

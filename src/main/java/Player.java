@@ -3,8 +3,8 @@ public class Player{
     private int level;
 
     public Player(){
-        this.name="Jared";
-        this.level=17;
+        name="Jared";
+        level=17;
     }
     public String getName(){
         return name;

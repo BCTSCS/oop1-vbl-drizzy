@@ -5,13 +5,13 @@ public class PaintingTest {
 
     @Test
     public void testPaintingTitleNotNull() {
-        Painting p = new Painting("Davinci", 1976);
+        Painting p = new Painting();
         assertNotNull(p.getTitle());
     }
 
     @Test
     public void testPaintingYearValid() {
-        Painting p = new Painting("Davinci", 1976);
+        Painting p = new Painting();
         assertTrue(p.getYear() > 0);
     }
 }
