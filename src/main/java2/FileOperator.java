@@ -3,16 +3,14 @@ import java.util;
 public class FileOperator {
     private File myFile;
     private Scanner fileReader;
-    public FileOperator(String f) {
+    public FileOperator(String f) throws IOException {
         setFile(f);
     }
-    public void setFile(String f) {
+    public void setFile(String f) throws IOException{
         myFile = new File(f);
         fileReader = new Scanner(myFile);
     }
     public String returnLine() {
         return fileReader.nextLine();
-        String server = a.receiveMessage();
-        System.out.println("Server: " + server);
     }
 }

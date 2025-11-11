@@ -1,6 +1,7 @@
 import java.net;
 import java.io;
 import java.util;
+import java.io.IO;
 import java.util.Scanner;
 public class SimpleServer {
     private ServerSocket serverSocket;
@@ -9,7 +10,7 @@ public class SimpleServer {
     private Scanner in;
     public SimpleServer(int port) throws IOException  {
         serverSocket = new ServerSocket(port);
-        System.out.println("Server started and listening " + port);
+        System.out.println("Server started on port" + port);
         
     }
     public void acceptClient() {
@@ -25,20 +26,21 @@ public class SimpleServer {
     public void sendMessage(String message) {
         out.println(message);
     }
-    public void close() {
-    }
-    public static void main(String[] args) {
-        try  {
-            SimpleServer a = new SimpleServer("127.0.0.", 8888);
-            a.acceptClient();
-            String server= a.receiveMessage();
-            System.out.println("Server: " + server);
-            a.close();
-        }
-        catch(Exception e) {
-            System.out.println("Exception: ");
-            e.printStackTrace();
-
-        }
+    public void close() {}
+    public static void main(String[] args) throws IOException {
+        SimpleServer s = new SimpleServer(8888);
+        s.acceptClient();
+        FileOperator file = new FileOperator("server.txt");
+            while(true) {
+                String user = s.receiveMessage();
+                System.out.println("User: " + user);
+                if(user.equals("quit")) {
+                    break;
+                }
+                String response = file.readLine();
+                a.sendMessage(response);
+                System.out.println("Us:" + response);
+            }
+        s.close();
     }
 }
