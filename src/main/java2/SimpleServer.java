@@ -1,7 +1,6 @@
-import java.net;
-import java.io;
-import java.util;
-import java.io.IO;
+import java.net.*;
+import java.io.*;
+import java.util.*;
 import java.util.Scanner;
 public class SimpleServer {
     private ServerSocket serverSocket;
@@ -13,12 +12,12 @@ public class SimpleServer {
         System.out.println("Server started on port" + port);
         
     }
-    public void acceptClient() {
+    public void acceptClient() throws IOException {
         socket = serverSocket.accept();
         InputStream i= socket.getInputStream();
         OutputStream o= socket.getOutputStream();
         in = new Scanner(i);
-        out = new PrintWriter(o);
+        out = new PrintWriter(o, true);
     }
     public String receiveMessage() {
         return in.nextLine();
@@ -38,7 +37,7 @@ public class SimpleServer {
                     break;
                 }
                 String response = file.readLine();
-                a.sendMessage(response);
+                s.sendMessage(response);
                 System.out.println("Us:" + response);
             }
         s.close();

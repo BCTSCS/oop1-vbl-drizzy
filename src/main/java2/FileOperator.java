@@ -1,5 +1,5 @@
-import java.io;
-import java.util;
+import java.io.*;
+import java.util.*;
 public class FileOperator {
     private File myFile;
     private Scanner fileReader;
@@ -10,7 +10,7 @@ public class FileOperator {
         myFile = new File(f);
         fileReader = new Scanner(myFile);
     }
-    public String returnLine() {
+    public String readLine() {
         return fileReader.nextLine();
     }
 }
